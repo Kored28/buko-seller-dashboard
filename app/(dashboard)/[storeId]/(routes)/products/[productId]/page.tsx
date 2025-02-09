@@ -2,10 +2,12 @@ import prismadb from '@/lib/prismadb'
 import React from 'react'
 import { ProductForm } from './components/product-form'
 
-const ProductPage = async({
+interface ProductPageProps {
+  params: { productId: string, storeId: string }
+}
+
+const ProductPage: React.FC<ProductPageProps> = async({
     params
-}:{
-    params: { productId: string, storeId: string }
 }) => {
     const  { productId, storeId } = await params
     

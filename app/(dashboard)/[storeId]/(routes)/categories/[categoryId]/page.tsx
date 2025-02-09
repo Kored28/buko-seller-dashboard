@@ -1,11 +1,13 @@
 import prismadb from '@/lib/prismadb'
 import React from 'react'
-import { CategoryForm } from './components/category-form'
+import { CategoryForm } from './components/category-form';
 
-const CategoryPage = async({
-  params
-}:{
+interface CategoryPageProps {
   params: { categoryId: string, storeId: string }
+}
+
+const CategoryPage: React.FC<CategoryPageProps> = async({
+  params
 }) => {
   const  { categoryId, storeId } = await params
 

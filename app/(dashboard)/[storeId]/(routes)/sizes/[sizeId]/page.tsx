@@ -2,10 +2,12 @@ import prismadb from '@/lib/prismadb'
 import React from 'react'
 import { SizeForm } from './components/size-form'
 
-const SizePage = async({
-  params
-}:{
+interface SizePageProps {
   params: { sizeId: string }
+}
+
+const SizePage: React.FC<SizePageProps> = async({
+  params
 }) => {
   const  { sizeId } = await params
   

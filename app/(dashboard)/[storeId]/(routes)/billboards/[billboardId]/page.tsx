@@ -2,11 +2,13 @@ import prismadb from '@/lib/prismadb'
 import React from 'react'
 import { BillboardForm } from './components/billboard-form'
 
-const BillboardPage = async({
-    params
-}:{
-    params: { billboardId: string }
-}) => {
+interface BillboardPageProps {
+  params: { 
+    billboardId: string 
+  }
+}
+
+const BillboardPage: React.FC<BillboardPageProps> = async({ params }) => {
     const  { billboardId } = await params
     
     if (billboardId === "new") {

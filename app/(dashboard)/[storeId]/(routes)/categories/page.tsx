@@ -5,7 +5,11 @@ import prismadb from '@/lib/prismadb';
 import { CategoryClient } from './components/client'
 import { CategoryColumn } from './components/columns';
 
-const CategoriesPage = async({ params }: { params: { storeId: string }}) => {
+interface CategoriesPageProps { 
+  params: { storeId: string }
+}
+
+const CategoriesPage: React.FC<CategoriesPageProps> = async({ params }) => {
   const { storeId } = await params
 
   const caetgories = await prismadb.category.findMany({

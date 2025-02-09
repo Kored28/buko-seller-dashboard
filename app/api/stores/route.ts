@@ -32,7 +32,7 @@ export async function POST (req: Request) {
     };
 };
 
-export async function GET (req: Request) {
+export async function GET () {
     try {
 
         const store = await prismadb.store.findMany({});

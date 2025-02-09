@@ -6,7 +6,11 @@ import { ProductClient } from './components/client'
 import { ProductColumn } from './components/columns';
 import { formatter } from "@/lib/utils";
 
-const ProductsPage = async({ params }: { params: { storeId: string }}) => {
+interface ProductsPageProps { 
+  params: { storeId: string }
+}
+
+const ProductsPage: React.FC<ProductsPageProps> = async({ params }) => {
   const { storeId } = await params
 
   const products = await prismadb.product.findMany({
