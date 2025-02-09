@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  name String
+  userId String
+  imageUrl String?
+  billboards Billboard[] @relation("StoreToBillboard")
+  categories Category[] @relation("StoreToCategory")
+  sizes Size[] @relation("StoreToSize")
+  products Product[] @relation("StoreToProduct")
+  orders Order[] @relation("StoreToOrder")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Billboard {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  storeId String @db.ObjectId
+  store Store @relation("StoreToBillboard", fields: [storeId], references: [id])
+  label String
+  imageUrl String
+  categories Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  storeId String @db.ObjectId
+  store Store @relation("StoreToCategory", fields: [storeId], references: [id])
+  billboardId String @db.ObjectId
+  billboard Billboard @relation(fields: [billboardId], references: [id])
+  products Product[] @relation("CategoryToProduct")
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Size {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  storeId String @db.ObjectId
+  store Store @relation("StoreToSize", fields: [storeId], references: [id])
+  products Product[]
+  name String
+  value String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  storeId String @db.ObjectId
+  store Store @relation("StoreToProduct", fields: [storeId], references: [id])
+  categoryId String @db.ObjectId
+  category Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  name String
+  price Float
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+  sizeId String @db.ObjectId
+  size Size @relation(fields: [sizeId], references: [id])
+  images Image[]
+  orderItems OrderItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  productId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  storeId String @db.ObjectId
+  store Store @relation("StoreToOrder", fields: [storeId], references: [id])
+  orderItems OrderItem[]
+  isPaid Boolean @default(false)
+  phone String @default("")
+  address String @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id String @id @map("_id") @default(auto()) @db.ObjectId
+  orderId String @db.ObjectId
+  order Order @relation(fields: [orderId], references: [id])
+  productId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id])
+}
