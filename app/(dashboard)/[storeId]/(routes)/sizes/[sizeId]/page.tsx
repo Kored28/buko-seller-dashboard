@@ -9,7 +9,7 @@ interface SizePageProps {
 const SizePage: React.FC<SizePageProps> = async({
   params
 }) => {
-  const  { sizeId } = await params
+  const  { sizeId } = params
   
   if (sizeId === "new") {
       return (

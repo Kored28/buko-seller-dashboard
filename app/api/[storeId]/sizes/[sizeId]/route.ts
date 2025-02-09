@@ -51,7 +51,7 @@ export async function PATCH(req: Request,
             return new NextResponse("Value is required", { status: 400 })
         }
 
-        const { storeId, sizeId } = await params
+        const { storeId, sizeId } = params
         
         if(!storeId) {
             return new NextResponse("Store Id is required", { status: 400 })
@@ -98,7 +98,7 @@ export async function DELETE(
     try {
         const { userId } = await auth();
 
-        const { storeId, sizeId } = await params;
+        const { storeId, sizeId } = params;
         
         if(!userId){
             return new NextResponse("unauthenticated", { status: 401 });

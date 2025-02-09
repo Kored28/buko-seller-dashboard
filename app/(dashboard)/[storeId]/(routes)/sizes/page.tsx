@@ -10,7 +10,7 @@ interface SizesPageProps {
 }
 
 const SizesPage: React.FC<SizesPageProps> = async({ params }) => {
-  const { storeId } = await params
+  const { storeId } = params
 
   const sizes = await prismadb.size.findMany({
     where: {

@@ -9,7 +9,7 @@ interface ProductPageProps {
 const ProductPage: React.FC<ProductPageProps> = async({
     params
 }) => {
-    const  { productId, storeId } = await params
+    const  { productId, storeId } = params
     
 
     const categories = await prismadb.category.findMany({

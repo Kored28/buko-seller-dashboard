@@ -7,7 +7,7 @@ export async function GET(
     { params }: { params: { billboardId: string } }
 ) {
     try {
-        const { billboardId } = await params;
+        const { billboardId } = params;
 
 
         if(!billboardId) {
@@ -51,7 +51,7 @@ export async function PATCH(req: Request,
             return new NextResponse("Image URL is required", { status: 400 })
         }
 
-        const { storeId, billboardId } = await params
+        const { storeId, billboardId } = params
         
         if(!storeId) {
             return new NextResponse("Store Id is required", { status: 400 })
@@ -98,7 +98,7 @@ export async function DELETE(
     try {
         const { userId } = await auth();
 
-        const { storeId, billboardId } = await params;
+        const { storeId, billboardId } = params;
         
         if(!userId){
             return new NextResponse("unauthenticated", { status: 401 });

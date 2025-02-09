@@ -10,7 +10,7 @@ interface BillboardsPageProps {
 }
 
 const BillboardsPage: React.FC<BillboardsPageProps> = async({ params }) => {
-  const { storeId } = await params
+  const { storeId } = params
 
   const billboards = await prismadb.billboard.findMany({
     where: {

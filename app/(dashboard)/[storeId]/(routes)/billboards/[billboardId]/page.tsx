@@ -9,7 +9,7 @@ interface BillboardPageProps {
 }
 
 const BillboardPage: React.FC<BillboardPageProps> = async({ params }) => {
-    const  { billboardId } = await params
+    const  { billboardId } = params
     
     if (billboardId === "new") {
         return (

@@ -11,7 +11,7 @@ interface OrdersPageProps {
 }
 
 const OrdersPage: React.FC<OrdersPageProps> = async({ params }) => {
-  const { storeId } = await params
+  const { storeId } =  params
 
   const orders = await prismadb.order.findMany({
     where: {

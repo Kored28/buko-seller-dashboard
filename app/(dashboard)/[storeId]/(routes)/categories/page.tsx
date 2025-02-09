@@ -10,7 +10,7 @@ interface CategoriesPageProps {
 }
 
 const CategoriesPage: React.FC<CategoriesPageProps> = async({ params }) => {
-  const { storeId } = await params
+  const { storeId } =  params
 
   const caetgories = await prismadb.category.findMany({
     where: {

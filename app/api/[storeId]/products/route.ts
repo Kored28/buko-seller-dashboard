@@ -43,7 +43,7 @@ export async function POST (req: Request,  { params }:{ params: { storeId: strin
             return new NextResponse("Images is Required", { status: 400 });
         }
         
-        const { storeId } = await params
+        const { storeId } = params
 
         if(!storeId) {
             return new NextResponse("Store id is Required", { status: 400 });
@@ -90,7 +90,7 @@ export async function POST (req: Request,  { params }:{ params: { storeId: strin
 export async function GET (req: Request, { params }: { params: { storeId: string } }) {
     try {
 
-        const { storeId } = await params;
+        const { storeId } =  params;
 
         if(!storeId) {
             return new NextResponse("Store id is Required", { status: 400 });
