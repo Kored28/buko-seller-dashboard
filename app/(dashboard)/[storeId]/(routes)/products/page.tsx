@@ -7,11 +7,11 @@ import { ProductColumn } from './components/columns';
 import { formatter } from "@/lib/utils";
 
 interface ProductsPageProps { 
-  params: { storeId: string }
+  params: Promise<{ storeId: string }>
 }
 
 const ProductsPage: React.FC<ProductsPageProps> = async({ params }) => {
-  const { storeId } = params
+  const { storeId } = await params
 
   const products = await prismadb.product.findMany({
     where: {

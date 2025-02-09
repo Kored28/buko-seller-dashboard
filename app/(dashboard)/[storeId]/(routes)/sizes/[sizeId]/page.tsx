@@ -3,13 +3,13 @@ import React from 'react'
 import { SizeForm } from './components/size-form'
 
 interface SizePageProps {
-  params: { sizeId: string }
+  params: Promise<{ sizeId: string }>
 }
 
 const SizePage: React.FC<SizePageProps> = async({
   params
 }) => {
-  const  { sizeId } = params
+  const  { sizeId } = await params
   
   if (sizeId === "new") {
       return (

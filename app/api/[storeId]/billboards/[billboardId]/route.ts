@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     req: Request, 
-    { params }: { params: { billboardId: string } }
+    { params }: { params: Promise<{ billboardId: string }> }
 ) {
     try {
-        const { billboardId } = params;
+        const { billboardId } = await params;
 
 
         if(!billboardId) {
@@ -30,7 +30,7 @@ export async function GET(
 };
 
 export async function PATCH(req: Request, 
-    { params }: { params: { storeId: string, billboardId: string } 
+    { params }: { params: Promise<{ storeId: string, billboardId: string }>
 }) {
     try {
         const { userId } = await auth();
@@ -51,7 +51,7 @@ export async function PATCH(req: Request,
             return new NextResponse("Image URL is required", { status: 400 })
         }
 
-        const { storeId, billboardId } = params
+        const { storeId, billboardId } = await params
         
         if(!storeId) {
             return new NextResponse("Store Id is required", { status: 400 })
@@ -93,12 +93,12 @@ export async function PATCH(req: Request,
 
 export async function DELETE(
     req: Request, 
-    { params }: { params: { storeId: string, billboardId: string } 
+    { params }: { params: Promise<{ storeId: string, billboardId: string }>
 }) {
     try {
         const { userId } = await auth();
 
-        const { storeId, billboardId } = params;
+        const { storeId, billboardId } = await params;
         
         if(!userId){
             return new NextResponse("unauthenticated", { status: 401 });

@@ -3,13 +3,13 @@ import React from 'react'
 import { BillboardForm } from './components/billboard-form'
 
 interface BillboardPageProps {
-  params: { 
+  params: Promise<{ 
     billboardId: string 
-  }
+  }>
 }
 
-const BillboardPage: React.FC<BillboardPageProps> = async({ params }) => {
-    const  { billboardId } = params
+const BillboardPage = async({ params }: BillboardPageProps) => {
+    const  { billboardId } = await params
     
     if (billboardId === "new") {
         return (

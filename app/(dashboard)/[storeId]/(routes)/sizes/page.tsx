@@ -6,11 +6,11 @@ import { SizesClient } from './components/client'
 import { SizeColumn } from './components/columns';
 
 interface SizesPageProps { 
-  params: { storeId: string }
+  params: Promise<{ storeId: string }>
 }
 
 const SizesPage: React.FC<SizesPageProps> = async({ params }) => {
-  const { storeId } = params
+  const { storeId } = await params
 
   const sizes = await prismadb.size.findMany({
     where: {

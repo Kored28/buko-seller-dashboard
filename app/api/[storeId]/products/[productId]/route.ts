@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     req: Request, 
-    { params }: { params: { productId: string } }
+    { params }: { params: Promise<{ productId: string }> }
 ) {
     try {
-        const { productId } = params;
+        const { productId } = await params;
 
 
         if(!productId) {
@@ -35,7 +35,7 @@ export async function GET(
 };
 
 export async function PATCH(req: Request, 
-    { params }: { params: { storeId: string, productId: string } 
+    { params }: { params: Promise<{ storeId: string, productId: string }>
 }) {
     try {
         const { userId } = await auth();
@@ -76,7 +76,7 @@ export async function PATCH(req: Request,
             return new NextResponse("Images is Required", { status: 400 });
         }
 
-        const { storeId, productId } = params
+        const { storeId, productId } = await params
         
         if(!storeId) {
             return new NextResponse("Store Id is required", { status: 400 })
@@ -138,12 +138,12 @@ export async function PATCH(req: Request,
 
 export async function DELETE(
     req: Request, 
-    { params }: { params: { storeId: string, productId: string } 
+    { params }: { params: Promise<{ storeId: string, productId: string }>
 }) {
     try {
         const { userId } = await auth();
 
-        const { storeId, productId } = params;
+        const { storeId, productId } = await params;
         
         if(!userId){
             return new NextResponse("unauthenticated", { status: 401 });

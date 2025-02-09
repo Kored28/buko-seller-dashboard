@@ -3,13 +3,13 @@ import React from 'react'
 import { ProductForm } from './components/product-form'
 
 interface ProductPageProps {
-  params: { productId: string, storeId: string }
+  params: Promise<{ productId: string, storeId: string }>
 }
 
 const ProductPage: React.FC<ProductPageProps> = async({
     params
 }) => {
-    const  { productId, storeId } = params
+    const  { productId, storeId } = await params
     
 
     const categories = await prismadb.category.findMany({

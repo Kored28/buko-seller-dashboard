@@ -6,11 +6,11 @@ import { BillboardClient } from './components/client'
 import { BillboardColumn } from './components/columns';
 
 interface BillboardsPageProps {
-   params: { storeId: string }
+   params: Promise<{ storeId: string }>
 }
 
 const BillboardsPage: React.FC<BillboardsPageProps> = async({ params }) => {
-  const { storeId } = params
+  const { storeId } = await params
 
   const billboards = await prismadb.billboard.findMany({
     where: {

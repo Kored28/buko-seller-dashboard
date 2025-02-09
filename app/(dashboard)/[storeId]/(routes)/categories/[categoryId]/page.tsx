@@ -3,13 +3,13 @@ import React from 'react'
 import { CategoryForm } from './components/category-form';
 
 interface CategoryPageProps {
-  params: { categoryId: string, storeId: string }
+  params: Promise<{ categoryId: string, storeId: string }>
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = async({
   params
 }) => {
-  const  { categoryId, storeId } = params
+  const  { categoryId, storeId } = await params
 
   const billboards = await prismadb.billboard.findMany({
     where: {

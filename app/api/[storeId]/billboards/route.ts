@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function POST (req: Request,  { params }:{ params: { storeId: string } }
+export async function POST (req: Request,  { params }:{ params: Promise<{ storeId: string }> }
 ) {
     try {
         const { userId } = await auth();        
@@ -20,7 +20,7 @@ export async function POST (req: Request,  { params }:{ params: { storeId: strin
             return new NextResponse("Image URL is Required", { status: 400 });
         }
         
-        const { storeId } = params
+        const { storeId } = await params
         if(!storeId) {
             return new NextResponse("Store id is Required", { status: 400 });
         }
@@ -52,10 +52,10 @@ export async function POST (req: Request,  { params }:{ params: { storeId: strin
     };
 };
 
-export async function GET (req: Request, { params }: { params: { storeId: string } }) {
+export async function GET (req: Request, { params }: { params: Promise<{ storeId: string }> }) {
     try {
 
-        const { storeId } =  params;
+        const { storeId } = await params;
 
         if(!storeId) {
             return new NextResponse("Store id is Required", { status: 400 });
