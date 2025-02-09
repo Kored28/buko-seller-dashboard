@@ -14,12 +14,12 @@ import {
     DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 
-import { BillboardColumn } from "./columns";
+import { OrderColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-    data: BillboardColumn;
+    data: OrderColumn;
 };
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
